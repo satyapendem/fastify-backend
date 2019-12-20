@@ -1,0 +1,26 @@
+{
+  "name": "fastify-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyapendem/fastify-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satyapendem/fastify-backend/issues"
+  },
+  "homepage": "https://github.com/satyapendem/fastify-backend#readme",
+  "dependencies": {
+    "fastify": "^2.11.0",
+    "fastify-cors": "^3.0.0",
+    "fastify-jwt": "^1.2.1"
+  }
+}
