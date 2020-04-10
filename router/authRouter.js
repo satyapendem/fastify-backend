@@ -1,14 +1,30 @@
+/**
+ * Author: Satya
+ * @param {*} fastify 
+ * Router
+ */
+const boom = require('boom');
+async function AuthRouter(fastify){
 
-async function authRouter(fastify, opts) {
-  fastify.post('/api/v1/generateAccessToken', async (request, reply) => {
-    const { email, username, userId } = request.body;
-    if (!email || !username || !userId) {
-      reply.status(400).send({ error: true, msg: 'Mandatory fields are missing' });
-    }
-    //SET DB level checks if any
-    const token = fastify.jwt.sign({ email, username, userId }, { expiresIn: 86400 });
-    reply.send({ token, email, userId });
-  });
+    fastify.post('/api/v1/generateAccessToken', async (req,res)=>{
+        try {
+            const {email, userid, password} = req.body;
+            if(!email || !userid || !password){
+                res.status(400).send({error: true,msg: "Manadatory params are missing"});
+                return;
+            }
+            // //DB checks
+            // let userData = await db.query("SELECT email from user where user_id=?",[userid]);
+            // if(userData && userData.lenth>0){
+            //     //generate JWT
+            // }
+         const token = fastify.jwt.sign({email, userid, password}, {expiresIn: 86400});
+         res.status(200).send({token, email})
+        } catch (error) {
+            throw boom.boomify(error);
+        }
+    })
+
 }
 
-module.exports = authRouter;
+module.exports = AuthRouter;

@@ -1,11 +1,17 @@
-module.exports = async function(fastify, opts) {
-    fastify.get(
-      "/api/v1/validateAccessToken",
-      {
-        preValidation: [fastify.authenticate]
-      },
-      async function(req, res) {
-         res.send({msg: "Successfully Authenticated"});
-      }
-    )
-  }
+/**
+ * Author: Satya
+ * @param {*} fastify 
+ * Router
+ */
+
+async function Router(fastify){
+
+    fastify.get('/routeValidation',{
+        preValidation:[fastify.jwtauthentication]
+    }, async (req,res)=>{
+        res.status(200).send({msg: "Successfully authenticated"});
+    })
+
+}
+
+module.exports = Router;

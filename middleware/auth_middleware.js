@@ -1,12 +1,17 @@
- 
-const fp = require('fastify-plugin');
+/**
+ * Author: Satya
+ * auth middleware decorator
+ */
 
-module.exports = fp(async (fastify) => {
-  fastify.decorate('authenticate', async (request, reply) => {
-    try {
-      await request.jwtVerify();
-    } catch (err) {
-      reply.send(err);
-    }
-  });
-});
+const fastifyPlugin = require('fastify-plugin');
+
+module.exports = fastifyPlugin(async (fastify)=>{
+    fastify.decorate('jwtauthentication', async (req,res)=>{
+        try {
+            await req.jwtVerify();
+        } catch (error) {
+            res.send(error);
+        }
+    })
+
+})
