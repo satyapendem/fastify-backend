@@ -5,6 +5,8 @@
 
 const fastify = require('fastify')({ logger: true });
 const boom = require('boom');
+
+const Socket = require('./controller/socketController');
 //const Router = require('./router/router');
 const Swagger = require('./swagger_options');
 fastify.register(require('fastify-cors'), {
@@ -26,6 +28,8 @@ fastify.addContentTypeParser('application/json', { parseAs: 'string' }, (req, bo
     }
 });
 
+//fastify websocket
+fastify.register(require('fastify-ws'));
 
 fastify.register(require('./middleware/auth_middleware'));
 fastify.register(require('./router/authRouter'));
@@ -92,6 +96,7 @@ fastify.register(require('./router/router'));
 const start = async () => {
     try {
         await fastify.listen(5008);
+        fastify.ws.on('connection', Socket.connect);
         fastify.swagger();
         fastify.log.info(`Server started at ${fastify.server.address().port}`);
     } catch (error) {
