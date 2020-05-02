@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>PDf file</title>
+    </head>
+    <body>
+        <div id="pdf-div">
+            <h1 style="color: #ff00ff"><center>hello guys</center></h1>
+            <p><b>Welcome to techmonster</b></p>
+            <a href="https://www.youtube.com/channel/UCC-9RfNay-TSbUC-j350BVg/videos"><input type="button" value="click here" /></a>
+        </div>
+    </body>
+    <script type="text/javascript">
+        fetch('http://localhost:5008/htmltopdf', {
+            method: "POST",
+            body: JSON.stringify({html: document.getElementById("pdf-div").innerHTML}),
+            headers: {
+                    "Content-Type": "application/json"
+                  }
+        }).then(res => res.blob()).then(file=> URL.createObjectURL(file)).then(url=>{
+            let ele = document.createElement("a");
+            ele.href = url;
+            ele.id = "pdf-download"
+            document.body.appendChild(ele);
+            ele.click();
+        })
+    
+    </script>
+</html>
