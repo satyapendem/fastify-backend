@@ -18,6 +18,6 @@
     "fastify-plugin": "^1.6.1",
     "fastify-swagger": "^2.5.1",
     "fastify-ws": "^1.0.3",
-    "html-pdf": "^2.2.0"
+    "html-pdf": "^3.0.1"
   }
 }
