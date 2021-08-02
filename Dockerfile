@@ -8,7 +8,6 @@ COPY package.json /usr/local/satya-app/
 
 RUN npm install
 COPY . /usr/local/satya-app
-ADD public /usr/local/satya-app/public
 
 EXPOSE 5051
 
